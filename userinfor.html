@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="CSS/userinfor.css">
 </head>
 <body>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5"> 
         <h2 class="mb-4 ml-5" style="font-weight: bold; color: #333; text-align: left;">Tài khoản của tôi</h2>
         <div class="row">
             <div class="col-md-3 text-center">
                 <div class="card p-4 ml-5">
                     <div class="position-relative d-inline-block">
-                        <img src="https://via.placeholder.com/150" class="rounded-circle img-fluid profile-img" alt="Profile Picture">
+                        <img src="./IMG/avatar.jpg" class="rounded-circle img-fluid profile-img" alt="Profile Picture">
                         <i class="fas fa-camera camera-icon"></i>
                     </div>
                     <h4 class="card-title">Minh Ngọc</h4>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="col-md-7">
-                <div class="p-4">
+                <div class="card p-4">
                     <form>
                         <div class="form-group">
                             <label for="name">Họ tên</label>
@@ -62,24 +62,46 @@
                         <div class="form-group">
                             <label>Ngày sinh</label>
                             <div class="form-row">
-                                <div class="col">
-                                    <select class="form-control" id="day">
-                                        <option selected>Ngày</option>
-                                        <!-- Add days here -->
-                                    </select>
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <select class="form-control-time" id="day">
+                                                <option selected>Ngày</option>
+                                                <!-- Add days here -->
+                                                <!-- Loop for days from 1 to 31 -->
+                                                <script>
+                                                    for (let i = 1; i <= 31; i++) {
+                                                        document.getElementById('day').innerHTML += `<option value="${i}">${i}</option>`;
+                                                    }
+                                                </script>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-control-time" id="month">
+                                                <option selected>Tháng</option>
+                                                <!-- Loop for months from 1 to 12 -->
+                                                <script>
+                                                    for (let i = 1; i <= 12; i++) {
+                                                        document.getElementById('month').innerHTML += `<option value="${i}">${i}</option>`;
+                                                    }
+                                                </script>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-control-time" id="year">
+                                                <option selected>Năm</option>
+                                                <!-- Loop for years from 1900 to current year -->
+                                                <script>
+                                                    const currentYear = new Date().getFullYear();
+                                                    for (let i = currentYear; i >= 1900; i--) {
+                                                        document.getElementById('year').innerHTML += `<option value="${i}">${i}</option>`;
+                                                    }
+                                                </script>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <select class="form-control" id="month">
-                                        <option selected>Tháng</option>
-                                        <!-- Add months here -->
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <select class="form-control" id="year">
-                                        <option selected>Năm</option>
-                                        <!-- Add years here -->
-                                    </select>
-                                </div>
+                                
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
