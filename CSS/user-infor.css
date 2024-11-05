@@ -110,9 +110,6 @@ body {
 .list-group-item-action:hover {
     background-color: #f0f0f0;
 }
-.list-group-item-action.active i {
-    color: #000;
-}
 
 
 
@@ -145,10 +142,4 @@ body {
     font-size: 16px;
     background-color: #f8f9fa;
     color: #495057;
-}
-.title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
