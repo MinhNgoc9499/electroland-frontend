@@ -16,7 +16,6 @@
                 <div class="card p-4 ml-5">
                     <div class="position-relative d-inline-block">
                         <img src="./IMG/avatar.jpg" class="rounded-circle img-fluid profile-img" alt="Profile Picture">
-                        <i class="fas fa-camera camera-icon"></i>
                     </div>
                     <h4 class="card-title">Minh Ngọc</h4>
                     <div class="list-group text-left">
@@ -60,59 +59,50 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Ngày sinh</label>
+                            <label  class="mb-3">Ngày sinh</label>
                             <div class="form-row">
-                                <div class="form-group">
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <select class="form-control-time" id="day">
-                                                <option selected>Ngày</option>
-                                                <!-- Add days here -->
-                                                <!-- Loop for days from 1 to 31 -->
-                                                <script>
-                                                    for (let i = 1; i <= 31; i++) {
-                                                        document.getElementById('day').innerHTML += `<option value="${i}">${i}</option>`;
-                                                    }
-                                                </script>
-                                            </select>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="dropdown mr-4">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dayDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Ngày
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dayDropdown" id="dayDropdownMenu">
+                                              
+                                            </div>
                                         </div>
-                                        <div class="col">
-                                            <select class="form-control-time" id="month">
-                                                <option selected>Tháng</option>
-                                                <!-- Loop for months from 1 to 12 -->
-                                                <script>
-                                                    for (let i = 1; i <= 12; i++) {
-                                                        document.getElementById('month').innerHTML += `<option value="${i}">${i}</option>`;
-                                                    }
-                                                </script>
-                                            </select>
+                              
+                                        <div class="dropdown mr-4">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="monthDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Tháng
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="monthDropdown" id="monthDropdownMenu">
+                                                
+                                            </div>
                                         </div>
-                                        <div class="col">
-                                            <select class="form-control-time" id="year">
-                                                <option selected>Năm</option>
-                                                <!-- Loop for years from 1900 to current year -->
-                                                <script>
-                                                    const currentYear = new Date().getFullYear();
-                                                    for (let i = currentYear; i >= 1900; i--) {
-                                                        document.getElementById('year').innerHTML += `<option value="${i}">${i}</option>`;
-                                                    }
-                                                </script>
-                                            </select>
+                                        
+                                        <!-- Dropdown Năm -->
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="yearDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Năm
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="yearDropdown" id="yearDropdownMenu">
+                                               
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                            </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                         </div>
-                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            
+        
+            <!-- jQuery, Popper.js, and Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script src="JS/user-infor.js"></script>
+          
 </body>
 </html>
