@@ -13,3 +13,10 @@ loginButton.addEventListener('click', () => {
     loginContainer.style.opacity = "1"; // Reset opacity to 1 to make it visible again
 });
 
+document.getElementById("chk1").addEventListener("change", function() {
+    if (this.checked) {
+        console.log("Menu mở");
+    } else {
+        console.log("Menu đóng");
+    }
+});
