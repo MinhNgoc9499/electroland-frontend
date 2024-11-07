@@ -1,7 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 * {
     box-sizing: border-box;
+}
+body, h1, h2, h3, p, button, input {
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -9,8 +12,8 @@ body {
     background-color: #F0F3F7;
     justify-content: center;
     align-items: center;
-    font-family: "Poppins", sans-serif;
-    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    margin:0px ;
     height: 100vh;
 }
 
@@ -48,7 +51,7 @@ a {
     border-radius: 25px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     position: relative;
-    width: 768px;
+    width: 1000px;
     max-width: 100%;
     min-height: 500px;
     overflow: hidden;
@@ -64,7 +67,6 @@ a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 50px;
     transition: all 0.6s ease-in-out;
 }
 
@@ -83,6 +85,7 @@ a {
     left: 0;
     opacity: 0;
     z-index: 1;
+    top:35px;
 }
 
 .container.right-panel-active .login-container {
@@ -161,53 +164,6 @@ a {
     transform: translateX(20%);
 }
 
-button {
-    border-radius: 20px;
-    border: 1px solid #4bb6b7;
-    background-color: #4bb6b7;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 800;
-    margin: 10px;
-    padding: 12px 45px;
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-.register-btn {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.register-btn .btn1 {
-    margin: 0;
-    padding: 12px 25px;
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-    border-radius: 20px;
-    border: 1px solid #4bb6b7;
-    background-color: #4bb6b7;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 750;
-}
-
-.btn1:hover {
-    letter-spacing: 1px;
-}
-
-.btn1:active {
-    transform: scale(0.95);
-}
-
-button:hover {
-    letter-spacing: 1.5px;
-}
-
-button:active {
-    transform: scale(0.95);
-}
 
 input {
     background-color: #eee;
@@ -221,6 +177,7 @@ input {
 .checkbox {
     display: flex;
     align-items: center;
+    margin: 5px 15px;
 }
 
 .checkbox input {
@@ -246,10 +203,15 @@ input {
 .row {
     display: flex;
     width: 100%;
+    gap: 10px; /* Khoảng cách giữa các cột */
 }
 
-.row input{
-    margin: 5px;
+.left-side, .right-side {
+    flex: 1; /* Chia đều không gian giữa hai cột */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Khoảng cách giữa các ô input */
+    margin-left:10px ;
 }
 
 .social-container {
@@ -275,11 +237,6 @@ input {
     width: 40px;
     transition: 0.3s ease-in-out;
 }
-
-.social-container a:hover{
-    border: 1px solid #4bb6b7;
-}
-
 
 .ghost {
     background: none;
@@ -333,4 +290,71 @@ input {
     .overlay-container {
         display: none;
     }
+}
+.register-btn {
+    display: flex;
+    gap: 10px; 
+}
+
+.form-signup {
+    height: 100%;
+    width: 100%;
+    padding: 0 20px;
+}
+/* Container cho nút */
+.register-btn {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Style cho nút "Đăng ký" */
+.btn1.primary {
+    background-color: #1a73e8; /* Màu xanh cho nút chính */
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px; /* Bo tròn nhẹ */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn1.google {
+    background-color: #202124; /* Màu nền tối cho nút Google */
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px; /* Bo tròn nhẹ */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa biểu tượng và văn bản */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.btn1.google:hover {
+    background-color: #3c4043; /* Màu xám nhạt hơn khi hover */
+}
+/* Hiệu ứng hover và active cho nút "Đăng ký" */
+.btn1.primary:hover {
+    background-color: #1669c1; /* Màu xanh đậm hơn khi hover */
+}
+.google-icon {
+    width: 15px;
+    height: 15px;
+}
+
+
+.typing-text {
+    color: #1a73e8; /* Màu sắc nổi bật */
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
 }
