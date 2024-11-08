@@ -194,7 +194,8 @@ input {
 .checkbox {
     display: flex;
     align-items: center;
-    margin: 5px 15px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .checkbox input {
