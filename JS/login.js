@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 index2 = 0;
                 textElement2.innerHTML = ""; 
                 typeText2(); 
-            }, 1000);
+            }, 5000);
         }
     }
 
@@ -61,24 +61,4 @@ document.getElementById("chk1").addEventListener("change", function() {
         console.log("Menu đóng");
     }
 });
-document.addEventListener("DOMContentLoaded", () => {
-    const textElement = document.getElementById("typing-text");
-    const text = "Chào mừng"; // Nội dung bạn muốn hiển thị
-    let index = 0;
 
-    function type() {
-        if (index < text.length) {
-            textElement.innerHTML += text.charAt(index);
-            index++;
-            setTimeout(type, 200); // Tốc độ gõ chữ (có thể điều chỉnh)
-        } else {
-            setTimeout(() => {
-                index = 0;
-                textElement.innerHTML = ""; // Xóa nội dung để gõ lại
-                type();
-            }, 1000); // Thời gian chờ trước khi bắt đầu gõ lại từ đầu
-        }
-    }
-
-    type(); // Bắt đầu hiệu ứng gõ chữ
-});

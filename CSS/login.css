@@ -69,6 +69,17 @@ a {
     flex-direction: column;
     transition: all 0.6s ease-in-out;
 }
+.form-container.login-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: all 0.6s ease-in-out;
+}
 
 .left-side,
 .right-side{
@@ -78,7 +89,6 @@ a {
 .login-container {
     left: 0;
     z-index: 2;
-    text-align: center;
 }
 
 .register-container {
@@ -173,7 +183,14 @@ input {
     margin: 8px 0;
     width: 100%;
 }
-
+.form-signin input{
+    background-color: #eee;
+    border-radius: 10px;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 90%;
+}
 .checkbox {
     display: flex;
     align-items: center;
@@ -240,6 +257,7 @@ input {
 
 .ghost {
     background: none;
+    font-size: larger;
     border: 1px solid #fff;
     padding: 10px 20px;
     color: #fff;
@@ -296,10 +314,23 @@ input {
     gap: 10px; 
 }
 
-.form-signup {
+.form-signup{
     height: 100%;
     width: 100%;
     padding: 0 20px;
+}
+.typing-text {
+    color: #1a73e8; /* Màu sắc nổi bật */
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
+.container1 {
+    display: grid;
+    width: 100%;
+    place-items: center;
 }
 /* Container cho nút */
 .register-btn {
@@ -309,9 +340,9 @@ input {
     margin-top: 20px;
 }
 
-/* Style cho nút "Đăng ký" */
+/* Nút "Đăng ký" */
 .btn1.primary {
-    background-color: #1a73e8; /* Màu xanh cho nút chính */
+    background: linear-gradient(135deg, #1a73e8, #4facfe); /* Gradient xanh chuyển sắc */
     color: #fff;
     font-size: 14px;
     font-weight: 600;
@@ -319,10 +350,38 @@ input {
     border: none;
     border-radius: 8px; /* Bo tròn nhẹ */
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
+/* Hiệu ứng phát sáng động */
+.btn1.primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-25deg);
+    transition: 0.5s;
+}
+
+/* Hiệu ứng hover cho nút "Đăng ký" */
+.btn1.primary:hover {
+    background: linear-gradient(135deg, #1669c1, #3a8dde); /* Gradient xanh đậm hơn khi hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(22, 105, 193, 0.6); /* Đổ bóng và ánh sáng rực rỡ */
+    transform: scale(1.08); /* Phóng to nhẹ */
+}
+
+/* Hiệu ứng ánh sáng động khi hover */
+.btn1.primary:hover::before {
+    left: 100%; /* Dịch chuyển ánh sáng từ trái qua phải */
+}
+
+/* Nút "Đăng ký với Google" */
 .btn1.google {
     background-color: #202124; /* Màu nền tối cho nút Google */
     color: #fff;
@@ -330,31 +389,44 @@ input {
     font-weight: 600;
     padding: 12px 20px;
     border: none;
-    border-radius: 8px; /* Bo tròn nhẹ */
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px; /* Khoảng cách giữa biểu tượng và văn bản */
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    gap: 8px;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
 }
+
+/* Hiệu ứng phát sáng động */
+.btn1.google::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-25deg);
+    transition: 0.5s;
+}
+
+/* Hiệu ứng hover cho nút "Đăng ký với Google" */
 .btn1.google:hover {
     background-color: #3c4043; /* Màu xám nhạt hơn khi hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(60, 64, 67, 0.6); /* Đổ bóng và ánh sáng rực rỡ */
+    transform: scale(1.08); /* Phóng to nhẹ */
 }
-/* Hiệu ứng hover và active cho nút "Đăng ký" */
-.btn1.primary:hover {
-    background-color: #1669c1; /* Màu xanh đậm hơn khi hover */
+
+/* Hiệu ứng ánh sáng động khi hover */
+.btn1.google:hover::before {
+    left: 100%; /* Dịch chuyển ánh sáng từ trái qua phải */
 }
+
+/* Cài đặt kích thước icon Google */
 .google-icon {
     width: 15px;
     height: 15px;
-}
-
-
-.typing-text {
-    color: #1a73e8; /* Màu sắc nổi bật */
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
 }
