@@ -5,11 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tài khoản của tôi</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="CSS/order-history-detail.css">
+    <link rel="shortcut icon" type="image/png" href="IMG/logoxanh.png">
 </head>
 <body>
+    <header></header>
+    <nav class="navbar navbar-expand-lg px-3">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+            <img src="IMG/logotrang.png"  height="65" alt="Logo">
+        </a>
+
+        <!-- Search Box -->
+        <div class="search-box me-auto">
+          <form action="#" class="d-flex position-relative">
+              <input class="form-control me-2" id="search" name="search" type="search" placeholder="Tìm kiếm theo tên sản phẩm..." aria-label="Search">
+              <button type="submit">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+          </form>
+        </div>
+
+
+        <!-- Navigation Links -->
+        <ul class="navbar-nav d-flex align-items-center">
+            <li class="nav-item mx-2">
+                <a class="nav-link text-white d-flex align-items-center" href="#">
+                    <i class="fa-solid fa-phone-volume fa-2x me-2"></i>
+                    <span>
+                        Hotline<br>0773699825
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-white d-flex align-items-center" href="#">
+                    <button class="btn btn-light me-2">
+                        <i class="fa-regular fa-user fa-2" style="color: black;"></i>
+                    </button>
+                    <span>
+                        Tài khoản<br><b>Đăng nhập</b>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link text-white d-flex align-items-center" href="#">
+                    <button class="btn btn-light me-2">
+                        <i class="fa-solid fa-cart-shopping fa-2" style="color: black;"></i>
+                    </button>
+                    <span>Giỏ hàng</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="d-lg-none">
+            <a for="chk1" id="menu" class="text-white">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        
+        <input type="checkbox" id="chk1" style="display:none;">
+      </div>
+    </nav>
+
+    <div class="bottom-navbar">
+        <div class="container">
+            <a href="#"><i class="fa fa-ticket"></i> Săn Voucher</a>
+            <a href="#"><i class="fa fa-newspaper"></i> Tin công nghệ</a>
+            <a href="#"><i class="fa fa-credit-card"></i> Hướng dẫn thanh toán</a>
+            <a href="#"><i class="fa fa-info-circle"></i> Hướng dẫn trả góp</a>
+            <a href="#"><i class="fa fa-wrench"></i> Tra cứu bảo hành</a>
+        </div>
+    </div>
     <div class="container-fluid mt-5">
         <h2 class="mb-4 ml-5" style="font-weight: bold; color: #333; text-align: left;">Tài khoản của tôi</h2>
         <div class="row">
@@ -132,6 +201,7 @@
         </div>
     </div>
 </div>
+    <script src="https://kit.fontawesome.com/b6b15d6477.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

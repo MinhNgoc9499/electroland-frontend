@@ -1,0 +1,469 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+}
+.container {
+    display: flex;
+    height: 70vh;
+    margin-top: 100px;
+   
+}
+.form-container {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+/*Form Khôi Phục Mật Khẩu*/ 
+.password-recovery {
+    flex: 1;
+    border-radius: 8px;
+    padding: 100px;
+}
+
+.password-recovery h2 {
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.password-recovery p {
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.password-recovery label {
+    font-size: 17px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.password-recovery input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.btn-cancel,
+.btn-confirm {
+    padding: 5px 15px;
+    font-size: 17px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background-color: #ffffff;
+    color: #000;
+    border: 1px solid #ccc;
+}
+.btn-cancel:hover{
+    background-color: #ccc;
+}
+
+
+.btn-confirm {
+    background-color:#00717B;
+    color: #fff;
+    border: none;
+}
+.btn-confirm:hover{
+    background-color: #007b5e;
+}
+.otp-verification{
+    flex: 1;
+    border-radius: 8px;
+    padding: 50px;
+}
+/*Form Xác Minh OTP*/ 
+.otp-verification {
+    flex: 1;
+    border-radius: 8px;
+    padding: 90px;
+}
+
+.otp-verification h2 {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.otp-verification p {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.otp-verification label {
+    font-size: 17px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+}
+.otp-bx{
+    display: flex;
+}
+.otp-bx input{
+    width: 60px;
+    font-size: 20px;
+    padding: 9px;
+    text-align: center;
+    border-radius: 4px;
+    margin: 2px;
+    border: 2px solid #000;
+    font-weight: bold;
+    color: #000;
+    outline: none;
+    transition: all 0.1s;
+}
+.otp-bx input:focus{
+    border: 2px solid #00717B;
+    box-shadow: 0 0 2px 2px #00717B;
+}
+.space{
+    margin-right: 2rem !important;
+}
+
+.change-email{
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.change-email:hover {
+    text-decoration: underline;
+}
+    
+.otp-verification a {
+    color:#00717B;
+}
+
+.email-label-container {
+    display:flex;
+    align-items: center;
+    gap: 20px; /* Khoảng cách giữa label và liên kết "Thay đổi email" */
+}
+  /* Đặt liên kết "Gửi lại mã OTP" dưới input */
+  .otp-input-container {
+    margin-top: 10px;
+}
+
+.resend-otp {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.resend-otp:hover {
+    text-decoration: underline;
+}
+/*Form Nhập Mật Khẩu Mới*/ 
+.new-password{
+    flex: 1;
+    border-radius: 8px;
+    padding: 90px;
+}
+.new-password h2 {
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.new-password p {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.new-password label {
+    font-size: 17px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.new-password input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+.input-group {
+    display: flex;
+    align-items: center; 
+    position: relative;
+}
+
+.input-group .form-control {
+    height: 38px; 
+    flex: 1;
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: 1px solid #ced4da;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    height: 38px; 
+    padding: 0 10px; 
+    margin-bottom: 15px;
+}
+/*Hình và chữ trong hình*/
+.image-container {
+    flex: 1;
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.overlay {
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+    color: #000;
+    max-width: 80%;
+}
+
+.overlay h2 {
+    margin-top: 3px;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.overlay p {
+    font-size: 20px;
+    margin-top: 2px;
+}
+.img-change {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.img-change:first-of-type {
+    left: 10px;
+}
+
+.img-change:last-of-type {
+    right: 10px;
+}
+@media only screen and (max-width: 46.1875em) {
+    .sidebar,
+    .promotions {
+        display: none;
+    }
+
+    .password-recovery {
+        width: 90%;
+        max-width: none;
+        border-radius: 15px;
+        margin: 0 auto;
+    }
+    
+    .password-recovery h2 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .password-recovery p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .password-recovery label {
+        font-size: 16px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .password-recovery input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .buttons {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .btn-cancel,
+    .btn-confirm {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+    
+    .btn-cancel {
+        background-color: #ffffff;
+        color: #000;
+        border: 1px solid #ccc;
+    }
+    .btn-cancel:hover {
+        background-color: #ccc;
+    }
+    
+    .btn-confirm {
+        background-color: #007b5e;
+        color: #fff;
+        border: none;
+    }
+    .btn-confirm:hover {
+        background-color: #00717B;
+    }
+
+    
+    .otp-verification {
+        width: 90%;
+        max-width: none;
+        border-radius: 15px;
+        margin: 0 auto;
+    }
+    
+    .otp-verification h2 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .otp-verification p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .otp-verification label {
+        font-size: 13px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .otp-verification input {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .change-email{
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    .change-email:hover {
+        text-decoration: underline;
+    }
+        
+    .otp-verification a {
+        color:#00717B;
+    }
+    
+    .resend-otp {
+        display: block;
+        margin-top: 5px;
+        font-size: 0.9em;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    .resend-otp:hover {
+        text-decoration: underline;
+    }
+    
+    /* Ngăn không cho chữ Email và Thay đổi email xuống dòng */
+    .email-label-container {
+        white-space: nowrap; /* Ngăn ngắt dòng */
+        display: flex; /* Sử dụng flexbox */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        gap: 10px; /* Khoảng cách giữa các phần tử */
+    }
+}
+
+
+/* Tablet: width between 740px and 1023px */
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .sidebar,
+    .promotions {
+        display: none;
+    }
+
+    .password-recovery {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .password-recovery h2 {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    
+    .password-recovery p {
+        font-size: 14px;
+    }
+    
+    .password-recovery label {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    .password-recovery input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+    
+    .buttons {
+        justify-content: flex-end;
+    }
+    
+    .btn-cancel,
+    .btn-confirm {
+        padding: 10px 25px;
+        font-size: 16px;
+        border-radius: 10px;
+    }
+}
