@@ -1,55 +1,529 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hiệu ứng gõ chữ</title>
+    <title>Address Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .overlay-panel {
-            text-align: center;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 40px;
-            border-radius: 10px;
+        body {
+            background-color: #f3f7fa;
+            font-family: Arial, sans-serif;
         }
 
-        .title {
-            font-size: 3rem;
+        .address-header {
+            border-top: 5px solid #007bff;
+            border-bottom: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f3f7fa;
+        }
+
+        .address-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .address-card {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            position: relative;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .address-card.active {
+            background-color: #e6f7ff;
+            border-color: #007bff;
+        }
+
+        .edit-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .add-address-btn {
+            font-size: 1.5rem;
+            color: #007bff;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .delete-btn {
+            font-size: 1.2rem;
+            color: #e74c3c;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+        }
+
+        .btn-delete-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            border-top: none;
+            text-align: center;
+        }
+
+        .modal-body .form-label {
             font-weight: bold;
-            color: #1a73e8;
-            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .address-fields {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .type-btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .type-btn {
+            padding: 5px 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .type-btn.active {
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+        }
+
+        .custom-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4caf50;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            background-color: #5a67d8;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #434190;
         }
     </style>
 </head>
+
 <body>
-    <div class="overlay-panel overlay-left">
-        <h1 class="title" id="typing-text"></h1>
-        <p class="subtitle">Rất vui được gặp lại bạn!</p>
-        <button class="ghost" id="login" style="font-size: 14px; margin: 10px 10px;">Đăng nhập</button> 
+
+<div class="container my-5">
+    <div class="address-header">
+        <h4>Danh sách địa chỉ</h4>
+        <button class="add-address-btn" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="clearModal()">
+            <i class="bi bi-plus-circle"></i> Thêm địa chỉ mới
+        </button>
     </div>
+    <div class="address-list" id="addressList">
+        <div class="address-card">
+            <div class="form-check">
+                <input class="form-check-input delete-checkbox" type="checkbox">
+            </div>
+            <h6 class="address-type">Văn Phòng</h6>
+            <p class="address-name">Nguyễn Thị Minh Ngọc</p>
+            <p class="address-phone">089 234 567 890</p>
+            <p class="address-detail">696/4 Âu Cơ, Phường 14, Quận Tân Bình, Thành Phố Hồ Chí Minh</p>
+            <a href="#" class="edit-btn" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="fillModal(this)">
+                <i class="bi bi-pencil"></i> Sửa
+            </a>
+        </div>
+        <div class="address-card active">
+            <div class="form-check">
+                <input class="form-check-input delete-checkbox" type="checkbox">
+            </div>
+            <h6 class="address-type">Nhà Riêng</h6>
+            <p class="address-name">Nguyễn Thị Minh Ngọc</p>
+            <p class="address-phone">089 234 567 890</p>
+            <p class="address-detail">696/4 Âu Cơ, Phường 14, Quận Tân Bình, Thành Phố Hồ Chí Minh</p>
+            <a href="#" class="edit-btn" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="fillModal(this)">
+                <i class="bi bi-pencil"></i> Sửa
+            </a>
+        </div>
+    </div>
+    <div class="btn-delete-container">
+        <button class="delete-btn" onclick="deleteSelectedCards()">
+            🗑️ Xóa
+        </button>
+    </div>
+</div>
 
+<!-- Modal cập nhật địa chỉ -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Cập nhật địa chỉ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Họ tên</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="phone">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ</label>
+                        <div class="address-fields">
+                            <select class="form-select" id="city">
+                                <option value="">Chọn tỉnh thành</option>
+                            </select>
+                            <select class="form-select" id="district">
+                                <option value="">Chọn quận huyện</option>
+                            </select>
+                        </div>
+                        <div class="address-fields">
+                            <select class="form-select" id="ward">
+                                <option value="">Chọn phường xã</option>
+                            </select>
+                            <input type="text" class="form-control" id="addressDetail">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Loại địa chỉ</label>
+                        <div class="type-btn-group">
+                            <button type="button" class="type-btn" data-type="văn phòng" onclick="toggleType(this)">Văn phòng</button>
+                            <button type="button" class="type-btn" data-type="nhà riêng" onclick="toggleType(this)">Nhà riêng</button>
+                            
+                        </div>
+                    </div>
+
+                    <div class="custom-toggle">
+                        <label class="form-check-label" for="defaultAddress">
+                            Đặt làm địa chỉ mặc định
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="defaultAddress">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function deleteSelectedCards() {
+        const checkboxes = document.querySelectorAll('.delete-checkbox');
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checkbox.closest('.address-card').remove();
+            }
+        });
+    }
+    </script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const textElement = document.getElementById("typing-text");
-            const text = "Chào mừng"; // Nội dung bạn muốn hiển thị
-            let index = 0;
+async function fillModal(editBtn) {
+    // Lấy thông tin từ card mà nút "Sửa" thuộc về
+    const card = editBtn.closest('.address-card');
+    const addressType = card.querySelector('.address-type').innerText.trim();
+    const addressName = card.querySelector('.address-name').innerText.trim();
+    const addressPhone = card.querySelector('.address-phone').innerText.trim();
+    const addressDetailText = card.querySelector('.address-detail').innerText.trim();
 
-            function type() {
-                if (index < text.length) {
-                    textElement.innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(type, 200); // Tốc độ gõ chữ (có thể điều chỉnh)
-                } else {
-                    setTimeout(() => {
-                        index = 0;
-                        textElement.innerHTML = ""; // Xóa nội dung để gõ lại
-                        type();
-                    }, 1000); // Thời gian chờ trước khi bắt đầu gõ lại từ đầu
+    // Tách địa chỉ dựa trên dấu phẩy và chuẩn hóa các chuỗi
+    const addressDetailArray = addressDetailText.split(',').map(part => part.trim());
+
+    // Phân tích thông tin chi tiết địa chỉ
+    const addressDetail = addressDetailArray[0] || '';
+    const ward = addressDetailArray[1] || '';
+    const district = addressDetailArray[2] || '';
+    const city = addressDetailArray[3] || '';
+
+    // Điền thông tin vào các trường trong modal
+    document.getElementById('name').value = addressName;
+    document.getElementById('phone').value = addressPhone;
+    document.getElementById('addressDetail').value = addressDetail;
+
+    // Kiểm tra xem card có class "active" không để đặt checkbox "Đặt làm địa chỉ mặc định"
+    const defaultAddressCheckbox = document.getElementById('defaultAddress');
+    defaultAddressCheckbox.checked = card.classList.contains('active');
+
+    try {
+        const result = await axios.get("https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json");
+        const data = result.data;
+
+        // Điền dữ liệu vào dropdown thành phố và chọn thành phố
+        fillCityDropdown(data, city).then(() => {
+            const cityData = data.find(item => normalizeString(item.Name) === normalizeString(city));
+            if (cityData) {
+                // Điền dữ liệu quận/huyện vào dropdown và chọn quận/huyện
+                fillDistrictDropdown(cityData, district).then(() => {
+                    const districtData = cityData.Districts.find(item => normalizeString(item.Name) === normalizeString(district));
+                    if (districtData) {
+                        // Điền dữ liệu phường/xã vào dropdown và chọn phường/xã
+                        fillWardDropdown(districtData, ward);
+                    }
+                });
+            }
+        });
+    } catch (error) {
+        console.error('Không thể lấy dữ liệu thành phố:', error);
+    }
+
+    // Đặt loại địa chỉ vào modal
+    document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.type-btn').forEach(btn => {
+        if (normalizeString(btn.dataset.type) === normalizeString(addressType)) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// Hàm để chuẩn hóa chuỗi để loại bỏ khoảng trắng và dấu không mong muốn
+function normalizeString(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/đ/g, 'd');
+}
+
+// Hàm để điền thành phố vào dropdown
+function fillCityDropdown(data, selectedCity) {
+    return new Promise((resolve) => {
+        const citySelect = document.getElementById('city');
+        citySelect.innerHTML = '<option value="">Chọn tỉnh thành</option>';
+        data.forEach(cityItem => {
+            const option = new Option(cityItem.Name, cityItem.Name);
+            citySelect.add(option);
+        });
+
+        // Đặt giá trị thành phố sau khi thêm option
+        const normalizedCity = normalizeString(selectedCity);
+        for (let i = 0; i < citySelect.options.length; i++) {
+            if (normalizeString(citySelect.options[i].value) === normalizedCity) {
+                citySelect.selectedIndex = i;
+                break;
+            }
+        }
+        resolve();
+    });
+}
+
+// Hàm để điền quận/huyện vào dropdown
+function fillDistrictDropdown(cityData, selectedDistrict) {
+    return new Promise((resolve) => {
+        const districtSelect = document.getElementById('district');
+        districtSelect.innerHTML = '<option value="">Chọn quận huyện</option>';
+        cityData.Districts.forEach(districtItem => {
+            const option = new Option(districtItem.Name, districtItem.Name);
+            districtSelect.add(option);
+        });
+
+        // Đặt giá trị quận/huyện sau khi thêm option
+        const normalizedDistrict = normalizeString(selectedDistrict);
+        for (let i = 0; i < districtSelect.options.length; i++) {
+            if (normalizeString(districtSelect.options[i].value) === normalizedDistrict) {
+                districtSelect.selectedIndex = i;
+                break;
+            }
+        }
+        resolve();
+    });
+}
+
+// Hàm để điền phường/xã vào dropdown
+function fillWardDropdown(districtData, selectedWard) {
+    const wardSelect = document.getElementById('ward');
+    wardSelect.innerHTML = '<option value="">Chọn phường xã</option>';
+    districtData.Wards.forEach(wardItem => {
+        const option = new Option(wardItem.Name, wardItem.Name);
+        wardSelect.add(option);
+    });
+
+    // Đặt giá trị phường/xã sau khi thêm option
+    const normalizedWard = normalizeString(selectedWard);
+    for (let i = 0; i < wardSelect.options.length; i++) {
+        if (normalizeString(wardSelect.options[i].value) === normalizedWard) {
+            wardSelect.selectedIndex = i;
+            break;
+        }
+    }
+}
+
+// Hàm để chuyển trạng thái "active" cho loại địa chỉ
+function toggleType(button) {
+    document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+}
+
+function clearModal() {
+    // Làm trống các trường trong modal khi nhấn vào "Thêm địa chỉ mới"
+    document.getElementById('name').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('district').length = 1;
+    document.getElementById('ward').length = 1;
+    document.getElementById('addressDetail').value = '';
+    document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+}
+
+function toggleType(button) {
+    document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+}
+
+
+
+function clearModal() {
+    // Làm trống các trường trong modal khi nhấn vào "Thêm địa chỉ mới"
+    document.getElementById('name').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('district').length = 1;
+    document.getElementById('ward').length = 1;
+    document.getElementById('addressDetail').value = '';
+    document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+}
+
+function toggleType(button) {
+    document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+}
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+    var citis = document.getElementById("city");
+    var districts = document.getElementById("district");
+    var wards = document.getElementById("ward");
+    var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        method: "GET",
+        responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+        renderCity(result.data);
+    });
+
+    function renderCity(data) {
+        citis.innerHTML = '<option value="">Chọn tỉnh thành</option>';
+        for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Name);
+        }
+        citis.onchange = function () {
+            districts.length = 1;
+            wards.length = 1;
+            if (this.value != "") {
+                const result = data.filter(n => n.Name === this.value);
+
+                for (const k of result[0].Districts) {
+                    districts.options[districts.options.length] = new Option(k.Name, k.Name);
                 }
             }
+        };
+        districts.onchange = function () {
+            wards.length = 1;
+            const dataCity = data.filter((n) => n.Name === citis.value);
+            if (this.value != "") {
+                const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
 
-            type(); // Bắt đầu hiệu ứng gõ chữ
-        });
-    </script>
+                for (const w of dataWards) {
+                    wards.options[wards.options.length] = new Option(w.Name, w.Name);
+                }
+            }
+        };
+    }
+</script>
+
+
 </body>
+
 </html>
