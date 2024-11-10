@@ -488,7 +488,7 @@ header {
     justify-content: center;
     align-items: center; 
     position: absolute;
-    top: 50%;
+    top: 51%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -503,29 +503,67 @@ header {
 
 .badge {
     position: absolute;
-    top: 0;
-    left: -5px;
-    display: flex;
+    top: -1%;
+    left: -17px;
     align-items: center;
     justify-content: center;
 }
 
 .badge img {
     width: 80px;
-    height: 40px;
-    position: absolute; /* Position the image */
-    z-index: 1;  /* Ensure image stays below the text */
+    height: 30px;
+    position: absolute;
+    z-index: 1; /* Ensure image stays behind text */
 }
 
 .badge span {
-    position: relative;  /* Position the text */
-    z-index: 9999;  /* Make sure the text appears on top of the image */
-    color: white;  /* Optional: Make the text white for better contrast */
-    font-weight: bold; /* Optional: Make the text bold */
+    position: absolute; /* Ensure the text is placed on top of the image */
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    top: 10px; /* Move text 10px down */
+    left: 20px; /* Move text 5px to the right */
 }
 
 .card-body img{
     width: 170px;
+}
+
+.card-body p{
+    margin: 0;
+    font-size: 16px;
+}
+.product-price{
+    margin: 0;
+}
+
+.current-price{
+    font-size: 17px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.listed-price{
+    font-size: 12px;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+.star i{
+    font-size: 13px;
+}
+
+.checked{
+    color: #ffa500;
+}
+
+.detail{
+    color: #ffffff;
+    background-color: #00717B;
+    padding: 3px 7px;
+    margin-left: 5%;
+    border-radius: 5px;
+    border: none;
 }
 
 @media (max-width: 1000px) {
