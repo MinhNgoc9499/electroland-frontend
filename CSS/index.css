@@ -292,16 +292,6 @@ header {
     font-size: 20px;
 }
 
-.flashsale-body{
-    position: absolute;
-    width: 100%;
-    top: 70px;
-}
-
-.flashsale-body img{
-    width: 100%;
-}
-
 .slider li{
     list-style: none;
 }
@@ -479,6 +469,64 @@ header {
     transform: translateX(400%);
 }
 
+
+.flashsale-body{
+    position: absolute;
+    width: 100%;
+    top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flashsale-body .backgroundflashsale{
+    width: 100%;
+}
+
+.product-item{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card {
+    width: 20%;
+    height: 300px;
+    transform: scale(0.9);
+    transform-origin: center;
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 0;
+    left: -5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge img {
+    width: 80px;
+    height: 40px;
+    position: absolute; /* Position the image */
+    z-index: 1;  /* Ensure image stays below the text */
+}
+
+.badge span {
+    position: relative;  /* Position the text */
+    z-index: 9999;  /* Make sure the text appears on top of the image */
+    color: white;  /* Optional: Make the text white for better contrast */
+    font-weight: bold; /* Optional: Make the text bold */
+}
+
+.card-body img{
+    width: 170px;
+}
 
 @media (max-width: 1000px) {
     .navbar ul {
