@@ -121,13 +121,13 @@ body {
     gap: 10px;
     margin-bottom: 20px;
 }
-.search-box {
+.search-box1 {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
 
-.search-box input {
+.search-box1 input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -199,18 +199,6 @@ body {
     color: white;
 }
 
-.search-box {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.search-box input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    flex-grow: 1;
-}
 
 .search-btn {
     padding: 10px 20px;
@@ -292,24 +280,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
     transform: translateY(-2px); /* tạo hiệu ứng nổi bật */
 }
-.search-box {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.search-input {
-    width: 100%;
-    padding: 10px 15px 10px 40px; /* Chừa không gian cho icon lớn hơn */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='gray' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: 10px center; /* Điều chỉnh vị trí biểu tượng */
-    background-size: 20px; /* Tăng kích thước biểu tượng */
-}
-
 .search-btn {
     padding: 10px 20px;
     background-color: #007bff;

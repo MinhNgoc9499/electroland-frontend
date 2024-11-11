@@ -3,467 +3,344 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.input-group-text {
+    height: 100%;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-}
-.container {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    color: #333;
+    height: 100vh;
     display: flex;
-    height: 70vh;
-    margin-top: 100px;
-   
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
+
+.container {
+    background: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1100px;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Progress Bar Styles */
+/* Progress Bar Container Styles */
+.progress-bar {
+width: 100%;
+height: 15px; /* Compact height */
+background: #2c3e50;
+border-radius: 20px;
+overflow: hidden;
+margin-bottom: 20px;
+position: relative;
+box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.2); /* Softer shadow */
+}
+
+/* Progress Fill Styles */
+.progress-bar .progress {
+height: 100%;
+width: 33%;
+background: linear-gradient(90deg, #00f2fe, #4facfe);
+border-radius: 20px;
+transition: width 1.5s ease-in-out;
+position: absolute;
+bottom: 0;
+animation: smooth-glow 2s ease-in-out infinite alternate, ripple 6s linear infinite;
+}
+
+/* Glow Animation */
+@keyframes smooth-glow {
+0% {
+box-shadow: 0px 0px 15px rgba(0, 123, 255, 0.5);
+}
+100% {
+box-shadow: 0px 0px 25px rgba(0, 123, 255, 0.8);
+}
+}
+
+/* Ripple Animation */
+@keyframes ripple {
+0% {
+background-position: 0% 50%;
+}
+100% {
+background-position: 100% 50%;
+}
+}
+
+
+/* Form Styles */
 .form-container {
-    flex: 1;
-    padding: 40px;
+    width: 50%;
+    padding: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #f9f9f9;
+    background: #fdfdfd;
+    position: relative;
+    border-radius: 20px;
 }
 
-/*Form Khôi Phục Mật Khẩu*/ 
-.password-recovery {
-    flex: 1;
-    border-radius: 8px;
-    padding: 100px;
+h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    animation: fadeInText 1s ease-in-out;
 }
 
-.password-recovery h2 {
-    font-size: 23px;
-    font-weight: 700;
-    margin-bottom: 20px;
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.password-recovery p {
-    font-size: 17px;
-    margin-bottom: 20px;
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+    animation: slideInText 1s ease-in-out;
 }
 
-.password-recovery label {
-    font-size: 17px;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 15px;
+@keyframes slideInText {
+    0% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-.password-recovery input {
+input[type="email"],
+input[type="password"],
+.otp-bx input {
     width: 100%;
-    padding: 10px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1.5px solid #ccc;
+    border-radius: 12px;
+    outline: none;
     margin-bottom: 25px;
+    background: #ffffff;
+    color: #333;
+    transition: all 0.3s ease;
 }
 
+input[type="email"]:focus,
+input[type="password"]:focus,
+.otp-bx input:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Button Styles */
 .buttons {
     display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .btn-cancel,
 .btn-confirm {
-    padding: 5px 15px;
-    font-size: 17px;
-    border-radius: 15px;
+    flex: 1;
+    padding: 14px 25px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-cancel::before,
+.btn-confirm::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 300%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-45deg);
+    transition: all 0.5s;
+}
+
+.btn-cancel:hover::before,
+.btn-confirm:hover::before {
+    left: 100%;
 }
 
 .btn-cancel {
-    background-color: #ffffff;
-    color: #000;
-    border: 1px solid #ccc;
-}
-.btn-cancel:hover{
-    background-color: #ccc;
+    background: #ff6b6b;
+    color: #ffffff;
 }
 
+.btn-cancel:hover {
+    background: #ff5252;
+    transform: scale(1.05);
+}
 
 .btn-confirm {
-    background-color:#00717B;
-    color: #fff;
-    border: none;
-}
-.btn-confirm:hover{
-    background-color: #007b5e;
-}
-.otp-verification{
-    flex: 1;
-    border-radius: 8px;
-    padding: 50px;
-}
-/*Form Xác Minh OTP*/ 
-.otp-verification {
-    flex: 1;
-    border-radius: 8px;
-    padding: 90px;
+    background: #2ecc71;
+    color: #ffffff;
 }
 
-.otp-verification h2 {
-    font-size: 25px;
-    font-weight: 700;
-    margin-bottom: 15px;
+.btn-confirm:hover {
+    background: #27ae60;
+    transform: scale(1.05);
 }
 
-.otp-verification p {
-    font-size: 15px;
-    margin-bottom: 10px;
-}
-
-.otp-verification label {
-    font-size: 17px;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 10px;
-}
-.otp-bx{
+/* OTP Input Boxes */
+.otp-bx {
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
-.otp-bx input{
-    width: 60px;
-    font-size: 20px;
-    padding: 9px;
+
+.otp-bx input {
+    width: 50px;
+    padding: 15px;
     text-align: center;
-    border-radius: 4px;
-    margin: 2px;
-    border: 2px solid #000;
-    font-weight: bold;
-    color: #000;
-    outline: none;
-    transition: all 0.1s;
-}
-.otp-bx input:focus{
-    border: 2px solid #00717B;
-    box-shadow: 0 0 2px 2px #00717B;
-}
-.space{
-    margin-right: 2rem !important;
+    font-size: 18px;
+    margin: 0 5px;
+    border-radius: 10px;
+    border: 1.5px solid #ccc;
+    background: #ffffff;
+    transition: all 0.3s ease;
 }
 
-.change-email{
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-.change-email:hover {
-    text-decoration: underline;
-}
-    
-.otp-verification a {
-    color:#00717B;
-}
-
-.email-label-container {
-    display:flex;
-    align-items: center;
-    gap: 20px; /* Khoảng cách giữa label và liên kết "Thay đổi email" */
-}
-  /* Đặt liên kết "Gửi lại mã OTP" dưới input */
-  .otp-input-container {
-    margin-top: 10px;
-}
-
-.resend-otp {
-    display: block;
-    margin-top: 10px;
-    font-size: 0.9em;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.resend-otp:hover {
-    text-decoration: underline;
-}
-/*Form Nhập Mật Khẩu Mới*/ 
-.new-password{
-    flex: 1;
-    border-radius: 8px;
-    padding: 90px;
-}
-.new-password h2 {
-    font-size: 23px;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.new-password p {
-    font-size: 17px;
-    margin-bottom: 10px;
-}
-
-.new-password label {
-    font-size: 17px;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 15px;
-}
-
-.new-password input {
-    width: 100%;
-    padding: 10px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    margin-bottom: 15px;
-}
-.input-group {
-    display: flex;
-    align-items: center; 
-    position: relative;
-}
-
-.input-group .form-control {
-    height: 38px; 
-    flex: 1;
-}
-
-.input-group-text {
-    background-color: transparent;
-    border: 1px solid #ced4da;
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    height: 38px; 
-    padding: 0 10px; 
-    margin-bottom: 15px;
-}
-/*Hình và chữ trong hình*/
+/* Image Container and Overlay Styles */
 .image-container {
-    flex: 1;
+    width: 50%;
     position: relative;
+    overflow: hidden;
 }
 
 .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-.overlay {
-    position: absolute;
-    bottom: 0px;
-    left: 20px;
-    color: #000;
-    max-width: 80%;
+    filter: brightness(85%);
+    border-radius: 20px;
 }
 
-.overlay h2 {
-    margin-top: 3px;
-    font-size: 23px;
-    font-weight: bold;
+.overlay {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    color: #ffeb3b;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 90%;
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .overlay p {
-    font-size: 20px;
-    margin-top: 2px;
+    animation: slideUp 3s ease infinite alternate;
+    color: #ffeb3b;
 }
-.img-change {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5em;
-    color: white;
-    background: none;
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.overlay h2 {
+    animation: fadeSlide 3s ease-in-out infinite alternate;
+    color: #ffeb3b;
+    font-style: italic;
+}
+
+@keyframes fadeSlide {
+    0% {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+        max-width: 600px;
+    }
+
+    .form-container,
+    .image-container {
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    .otp-bx input {
+        padding: 12px;
+    }
+}
+
+#toggle-password {
     border: none;
+    background: none;
     cursor: pointer;
-    z-index: 10;
+    color: #6c757d;
 }
 
-.img-change:first-of-type {
-    left: 10px;
+#toggle-password:hover {
+    color: #007bff;
 }
 
-.img-change:last-of-type {
-    right: 10px;
-}
-@media only screen and (max-width: 46.1875em) {
-    .sidebar,
-    .promotions {
-        display: none;
-    }
-
-    .password-recovery {
-        width: 90%;
-        max-width: none;
-        border-radius: 15px;
-        margin: 0 auto;
-    }
-    
-    .password-recovery h2 {
-        font-size: 16px;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-    
-    .password-recovery p {
-        font-size: 12px;
-        margin-bottom: 20px;
-    }
-    
-    .password-recovery label {
-        font-size: 16px;
-        font-weight: 600;
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    .password-recovery input {
-        width: 100%;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        margin-bottom: 20px;
-    }
-    
-    .buttons {
-        display: flex;
-        gap: 10px;
-        width: 100%;
-    }
-    
-    .btn-cancel,
-    .btn-confirm {
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 15px;
-        cursor: pointer;
-    }
-    
-    .btn-cancel {
-        background-color: #ffffff;
-        color: #000;
-        border: 1px solid #ccc;
-    }
-    .btn-cancel:hover {
-        background-color: #ccc;
-    }
-    
-    .btn-confirm {
-        background-color: #007b5e;
-        color: #fff;
-        border: none;
-    }
-    .btn-confirm:hover {
-        background-color: #00717B;
-    }
-
-    
-    .otp-verification {
-        width: 90%;
-        max-width: none;
-        border-radius: 15px;
-        margin: 0 auto;
-    }
-    
-    .otp-verification h2 {
-        font-size: 16px;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-    
-    .otp-verification p {
-        font-size: 12px;
-        margin-bottom: 20px;
-    }
-    
-    .otp-verification label {
-        font-size: 13px;
-        font-weight: 600;
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    .otp-verification input {
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        margin-bottom: 20px;
-    }
-    
-    .change-email{
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 5px;
-    }
-    .change-email:hover {
-        text-decoration: underline;
-    }
-        
-    .otp-verification a {
-        color:#00717B;
-    }
-    
-    .resend-otp {
-        display: block;
-        margin-top: 5px;
-        font-size: 0.9em;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-    }
-    
-    .resend-otp:hover {
-        text-decoration: underline;
-    }
-    
-    /* Ngăn không cho chữ Email và Thay đổi email xuống dòng */
-    .email-label-container {
-        white-space: nowrap; /* Ngăn ngắt dòng */
-        display: flex; /* Sử dụng flexbox */
-        align-items: center; /* Căn giữa theo chiều dọc */
-        gap: 10px; /* Khoảng cách giữa các phần tử */
-    }
-}
-
-
-/* Tablet: width between 740px and 1023px */
-@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
-    .sidebar,
-    .promotions {
-        display: none;
-    }
-
-    .password-recovery {
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    
-    .password-recovery h2 {
-        font-size: 18px;
-        font-weight: 700;
-    }
-    
-    .password-recovery p {
-        font-size: 14px;
-    }
-    
-    .password-recovery label {
-        font-size: 16px;
-        font-weight: 600;
-    }
-    
-    .password-recovery input {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-    }
-    
-    .buttons {
-        justify-content: flex-end;
-    }
-    
-    .btn-cancel,
-    .btn-confirm {
-        padding: 10px 25px;
-        font-size: 16px;
-        border-radius: 10px;
-    }
+#eye-icon {
+    font-size: 1.2em;
+    transition: color 0.3s ease;
 }

@@ -1,166 +1,116 @@
-
-// lỗi khi không nhập password
 function validateEmail() {
     const email = document.getElementById('email').value;
     const emailError = document.getElementById('email-error');
-    
-    // Regular expression to check for a Gmail address
-    const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-
-    if (email === "") {
+    if (!email) {
         emailError.style.display = 'block';
-        emailError.textContent = "Nhập email của bạn";
-    } else if (!gmailPattern.test(email)) {
-        emailError.style.display = 'block';
-        emailError.textContent = "Email này không tồn tại hoặc không phải là Gmail";
     } else {
         emailError.style.display = 'none';
-        showOtpVerification();
+        document.getElementById('password-recovery').style.display = 'none';
+        document.getElementById('otp-verification').style.display = 'block';
+        document.getElementById('progress').style.width = '66%';
     }
 }
 
+function moveToNextBox(currentBox) {
+    if (currentBox < 6) {
+        const currentInput = document.getElementById(`otp-${currentBox}`);
+        const nextInput = document.getElementById(`otp-${currentBox + 1}`);
+        if (currentInput.value) {
+            nextInput.focus();
+        }
+    }
+}
 
+function resendOtp() {
+    alert('OTP đã được gửi lại. Vui lòng kiểm tra email của bạn.');
+}
 
-
-// Đổi trang
-function showOtpVerification() {
-    const email = document.getElementById('email').value;
-    document.querySelectorAll('.otp-email').forEach(element => {
-        element.innerText = email;
+function confirmOtp() {
+    const otpInputs = document.querySelectorAll('.otp-bx input');
+    let otp = '';
+    otpInputs.forEach(input => {
+        otp += input.value;
     });
-    document.getElementById('password-recovery').style.display = 'none';
-    document.getElementById('otp-verification').style.display = 'block';
+    if (otp.length === 6) {
+        document.getElementById('otp-verification').style.display = 'none';
+        document.getElementById('new-password').style.display = 'block';
+        document.getElementById('progress').style.width = '100%';
+    } else {
+        document.getElementById('otp-error').textContent = 'Vui lòng nhập đầy đủ mã OTP.';
+        document.getElementById('otp-error').style.display = 'block';
+    }
 }
 
 function goBackToRecovery() {
+    document.getElementById('otp-verification').style.display = 'none';
     document.getElementById('password-recovery').style.display = 'block';
-    document.getElementById('otp-verification').style.display = 'none';
-}
-
-
-
-
-function confirmOtp() {
-    const otpError = document.getElementById('otp-error');
-    let otpCode = "";
-    for (let i = 1; i <= 6; i++) {
-        const otpInput = document.getElementById(`otp-${i}`);
-        
-        if (otpInput.value === "") {
-            otpError.style.display = 'block';
-            otpError.textContent = "Bạn cần nhập đầy đủ mã OTP.";
-            return;
-        }
-        
-        otpCode += otpInput.value;
-    }
-    otpError.style.display = 'none';
-    document.getElementById('otp-verification').style.display = 'none';
-    document.getElementById('new-password').style.display = 'block';
+    document.getElementById('progress').style.width = '33%';
 }
 
 function goBackToOtp() {
-    document.getElementById('otp-verification').style.display = 'block';
     document.getElementById('new-password').style.display = 'none';
+    document.getElementById('otp-verification').style.display = 'block';
+    document.getElementById('progress').style.width = '66%';
 }
 
 
+// Function to toggle password visibility for a specific input field
+function togglePasswordVisibility(inputId) {
+    const passwordField = document.getElementById(inputId);
+    const eyeIcon = passwordField.nextElementSibling.querySelector('i');
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    }
+}
 
+// Function to toggle visibility for new password input
+function toggleNewPasswordVisibility() {
+    togglePasswordVisibility('new-password-input');
+}
 
-// Hiện thị mật khẩu sang text 
-const togglePasswordButton = document.getElementById('toggle-password');
-const newPasswordInput = document.getElementById('new-password-input');
+// Function to toggle visibility for confirm password input
+function toggleConfirmPasswordVisibility() {
+    togglePasswordVisibility('confirm-password-input');
+}
 
-togglePasswordButton.addEventListener('click', function() {
-    const type = newPasswordInput.type === 'password' ? 'text' : 'password';
-    newPasswordInput.type = type;
-
-    // Cập nhật biểu tượng
-    this.querySelector('#eye-icon').classList.toggle('fa-eye');
-    this.querySelector('#eye-icon').classList.toggle('fa-eye-slash');
-});
-
-
-
-
-
-
-// Nhập mật khẩu đúng với theo 3 yêu cầu 
 function confirmNewPassword() {
-    const newPassword = newPasswordInput.value;
+    const newPassword = document.getElementById('new-password-input').value;
+    const confirmPassword = document.getElementById('confirm-password-input').value;
     const lengthRequirement = document.getElementById('length-requirement');
     const characterRequirement = document.getElementById('character-requirement');
-    const allowedCharacters = document.getElementById('allowed-characters');
+    const allowedCharacters = /[a-zA-Z0-9~.!@#$%^&*]/;
 
-    // Biểu thức chính quy để xác thực mật khẩu
-    const lengthPattern = /^.{8,20}$/; // Độ dài từ 8-20 ký tự
-    const characterPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~.!@#$%^&*<>])/; // Chứa chữ cái, số và ký tự đặc biệt
-
-    // Kiểm tra độ dài
-    if (lengthPattern.test(newPassword)) {
-        lengthRequirement.style.color = 'green'; // Đúng yêu cầu
+    if (newPassword.length < 8 || newPassword.length > 20) {
+        lengthRequirement.style.color = 'red';
     } else {
-        lengthRequirement.style.color = 'red'; // Không đúng yêu cầu
+        lengthRequirement.style.color = '#555';
     }
 
-    // Kiểm tra ký tự
-    if (characterPattern.test(newPassword)) {
-        characterRequirement.style.color = 'green'; // Đúng yêu cầu
+    if (!/[a-zA-Z]/.test(newPassword) || !/[0-9]/.test(newPassword) || !allowedCharacters.test(newPassword)) {
+        characterRequirement.style.color = 'red';
     } else {
-        characterRequirement.style.color = 'red'; // Không đúng yêu cầu
+        characterRequirement.style.color = '#555';
     }
 
-    // Kiểm tra tất cả các điều kiện
-    if (lengthPattern.test(newPassword) && characterPattern.test(newPassword)) {
-        allowedCharacters.style.color = 'green'; // Đúng yêu cầu
+    if (newPassword !== confirmPassword) {
+        alert('Mật khẩu xác nhận không khớp. Vui lòng nhập lại.');
+    } else if (newPassword.length >= 8 && newPassword.length <= 20 && /[a-zA-Z]/.test(newPassword) && /[0-9]/.test(newPassword) && allowedCharacters.test(newPassword)) {
+        alert('Mật khẩu của bạn đã được thay đổi thành công.');
+        // Redirect to login page or another appropriate action
+        window.location.href = 'login.html';
     } else {
-        allowedCharacters.style.color = 'red'; // Không đúng yêu cầu
+        alert('Vui lòng kiểm tra lại các yêu cầu về mật khẩu.');
     }
 }
 
-
-function moveToNextBox(currentBox) {
-    const currentInput = document.getElementById(`otp-${currentBox}`);
-    const nextBox = currentBox + 1;
-    const nextInput = document.getElementById(`otp-${nextBox}`);
-
-    // Move to the next input box if the current box is filled and there is a next box
-    if (currentInput.value.length === 1 && nextInput) {
-        nextInput.focus();
-    }
-    
-    // Handle backspace to move focus to the previous box
-    currentInput.addEventListener('keydown', function(event) {
-        if (event.key === "Backspace" && currentBox > 1 && currentInput.value === '') {
-            const previousInput = document.getElementById(`otp-${currentBox - 1}`);
-            previousInput.focus();
-        }
-    });
+function goBackToHome() {
+    // Logic to go back to home or landing page
+    window.location.href = 'index.html';
 }
-
-
-//Chuyển đổi hình ảnh
-let images = [
-    "img/turntable-top-view-audio-equipment-159376.jpeg",
-    "img/pexels-photo-341523.webp"
-    
-];
-let currentIndex = 0;
-
-function showImage(index) {
-    const img = document.getElementById("slide");
-    img.src = images[index];
-}
-
-function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
-}
-
-function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage(currentIndex);
-}
-
-// Auto slide every 5 seconds
-setInterval(nextImage, 10000);

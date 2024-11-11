@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tài khoản của tôi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
     <link rel="stylesheet" href="CSS/order-history-detail.css">
-    
+    <link rel="stylesheet" href="CSS/order-history.css">
+    <link rel="stylesheet" href="CSS/user-infor.css">
+    <link rel="stylesheet" href="CSS/user-address.css">
+</head>
     <link rel="shortcut icon" type="image/png" href="IMG/logoxanh.png">
 </head>
 <body>
@@ -93,7 +98,7 @@
                         <button class="list-group-item list-group-item-action" onclick="showContent('accountInfo')">
                             <i class="fas fa-user"></i> Thông tin tài khoản
                         </button>
-                        <button class="list-group-item list-group-item-action active" onclick="showContent('shoppingHistory')">
+                        <button class="list-group-item list-group-item-action" onclick="showContent('shoppingHistory')">
                             <i class="fas fa-shopping-cart"></i> Lịch sử mua sắm
                         </button>
                         <button class="list-group-item list-group-item-action" onclick="showContent('address')">
@@ -111,13 +116,17 @@
             </div>
         </div>
     </div>
-</div>
-<script src="JS/order-history.js"></script>
-<script src="JS/myaccount.js"></script>
+</div> 
     <script src="https://kit.fontawesome.com/b6b15d6477.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="JS/user-address.js"></script>
+    <script src="JS/myaccount.js"></script>
+    <script src="JS/user-infor.js"></script>
+
 </body>
 
 </html>

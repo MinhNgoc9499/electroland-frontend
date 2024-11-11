@@ -1,10 +1,11 @@
+// Hiển thị tab "Hoàn thành" mặc định
 function showTab(tabId) {
     // Ẩn tất cả các tab nội dung
     const tabContents = document.querySelectorAll('.tab-content');
     tabContents.forEach(tabContent => {
         tabContent.style.display = 'none';
     });
-
+    document.getElementById('completed').style.display = 'block';
     // Hiển thị tab được chọn
     document.getElementById(tabId).style.display = 'block';
 
@@ -18,5 +19,3 @@ function showTab(tabId) {
     event.currentTarget.classList.add('active');
 }
 
-// Hiển thị tab "Hoàn thành" mặc định
-document.getElementById('completed').style.display = 'block';
