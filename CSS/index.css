@@ -252,8 +252,13 @@ header {
     display: flex;
 }
 
+.flashsale-container, .product-category {
+    width: 100%;
+}
+
 .flashsale-container{
     position: relative;
+    height: 600px;
 }
 .flashsale-title{
     z-index: 2;
@@ -265,6 +270,10 @@ header {
     align-items: center;
     text-align: center;
     justify-content: space-between;
+}
+
+.flashsale-title h3{
+    color: #ff0000;
 }
 
 .timer .timer-title{
@@ -483,7 +492,7 @@ header {
     width: 100%;
 }
 
-.product-item{
+.flashsale-body .product-item{
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -493,7 +502,7 @@ header {
     transform: translate(-50%, -50%);
 }
 
-.card {
+.flashsale-body .card {
     width: 20%;
     height: 300px;
     transform: scale(0.9);
@@ -501,7 +510,7 @@ header {
     position: relative;
 }
 
-.badge {
+.flashsale-body .badge {
     position: absolute;
     top: -1%;
     left: -17px;
@@ -509,14 +518,14 @@ header {
     justify-content: center;
 }
 
-.badge img {
+.flashsale-body .badge img {
     width: 80px;
     height: 30px;
     position: absolute;
     z-index: 1; /* Ensure image stays behind text */
 }
 
-.badge span {
+.flashsale-body .badge span {
     position: absolute; /* Ensure the text is placed on top of the image */
     z-index: 9999;
     color: white;
@@ -525,45 +534,292 @@ header {
     left: 20px; /* Move text 5px to the right */
 }
 
-.card-body img{
+.flashsale-body .card-body img{
     width: 170px;
 }
 
-.card-body p{
+.flashsale-body .card-body p{
     margin: 0;
     font-size: 16px;
 }
-.product-price{
+.flashsale-body .product-price{
     margin: 0;
 }
 
-.current-price{
+.flashsale-body .current-price{
     font-size: 17px;
     font-weight: bold;
     color: #ff0000;
 }
 
-.listed-price{
+.flashsale-body .listed-price{
     font-size: 12px;
     text-decoration: line-through;
     margin-left: 5px;
 }
 
-.star i{
+.flashsale-body .star i{
     font-size: 13px;
 }
 
-.checked{
+.flashsale-body .checked{
     color: #ffa500;
 }
 
-.detail{
+.flashsale-body .detail{
     color: #ffffff;
     background-color: #00717B;
     padding: 3px 7px;
     margin-left: 5%;
     border-radius: 5px;
     border: none;
+}
+
+.product-category {
+    position: relative;
+    height: 410px;
+    margin-bottom: 20px;
+}
+
+.product-category .card{
+    width: 100%;
+    border: none;
+}
+
+.product-category .card .card-header{
+    font-size: 30px;
+    font-weight: 500;
+    background-color: #fff;
+}
+
+.product-category .card .card-body{
+    font-weight: 450;
+    background-color: white;
+}
+
+.product-category-item{
+    width: 10%;
+    text-align: center;
+}
+
+.product-category-item img{
+    width: 100%;
+    height: 110px
+}
+
+.product-category-item a{
+    text-decoration: none;
+    color: black;
+}
+
+.product-category-item a:hover {
+    color: #00A8CC;
+}
+
+.product-category-item:hover {
+    transform: scale(1.05);
+}
+
+.product-category .row{
+    margin-bottom: 10px;
+}
+
+.top-phone-nav {
+    display: flex;
+    height: 80px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.top-phone-nav .card {
+    border: none;
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-phone-nav .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+    color: #00717B;
+}
+
+.top-phone-nav .card-title::after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 30px;
+    background-color: #ddd;
+    margin-left: 20px; 
+}
+
+.top-phone-nav button{
+    margin-left: 5px;
+    padding: 10px 15px;
+    background-color: #D9D9D9;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s;
+}
+
+.top-phone-nav button:hover {
+    background-color: #00717B;
+    color: white;
+}
+
+.top-phone{
+    position: relative;
+    width: 100%;
+}
+
+.top-phone .product-item{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.top-phone .row{
+    margin-bottom: 20px;
+}
+.top-phone .card{
+    width: 16%;
+    height: 300px;
+    transform-origin: center;
+    position: relative;
+    border: none;
+}
+
+.top-phone .badge {
+    position: absolute;
+    top: -1%;
+    left: -17px;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-phone .badge img {
+    width: 80px;
+    height: 30px;
+    position: absolute;
+    z-index: 1;
+}
+
+.top-phone .badge span {
+    position: absolute;
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    top: 10px;
+    left: 20px;
+}
+
+.top-phone .card-body img{
+    width: 170px;
+}
+
+.top-phone .card-body p{
+    margin: 0;
+    font-size: 16px;
+}
+.top-phone .product-price{
+    margin: 0;
+}
+
+.top-phone .current-price{
+    font-size: 15px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.top-phone .listed-price{
+    font-size: 12px;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+.top-phone .star i{
+    font-size: 13px;
+}
+
+.top-phone .checked{
+    color: #ffa500;
+}
+
+.top-phone .detail{
+    color: #ffffff;
+    background-color: #00717B;
+    padding: 3px 7px;
+    border-radius: 5px;
+    border: none;
+}
+
+.advertisement {
+    width: 100%;
+    height: 350px;
+    gap: 20px;
+    display: flex;
+    position: relative;
+}
+
+.advertisement-item {
+    flex: 1; /* This will ensure each item takes equal space */
+}
+
+.advertisement-item .card {
+    width: 100%;
+    height: 300px;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+    background-color: transparent !important;
+}
+
+.advertisement-item img{
+    border-radius: 20px;
+    width: 350px;
+    top: 8%;
+    left: 8%;
+    z-index: 2;
+    position: absolute;
+}
+
+.advertisement-item img:hover{
+    transform: scale(1.03);
+}
+
+.advertisement-item h4{
+    bottom: 10%;
+    font-size: 20px;
+    left: 8%;
+    z-index: 2;
+    position: absolute;
+}
+
+.advertisement-item p{
+    bottom: 0;
+    left: 8%;
+    z-index: 2;
+    position: absolute;
+}
+.card-orange {
+    background-image: url("../IMG/backgroundcam.png");
+    color: white;
+}
+
+.card-blue {
+    background-image: url("../IMG/backgroundxanhbien.png");
+    color: white;
+}
+
+.card-green {
+    background-image: url("../IMG/backgroundxanh.png");
+    color: white;
 }
 
 @media (max-width: 1000px) {
