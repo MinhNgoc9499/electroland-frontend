@@ -1,70 +1,250 @@
-<!-- Form Nhập Mật Khẩu Mới -->
-<div id="new-password" class="new-password" style="display: none;">
-    <h2>Đặt lại mật khẩu</h2>
-    <p>Nhập mật khẩu mới bên dưới để tiếp tục.</p>
-    <label for="new-password-input">Mật khẩu mới</label>
-    <div class="input-group mb-3">
-        <input type="password" id="new-password-input" class="form-control" placeholder="Nhập mật khẩu mới">
-        <button class="btn btn-outline-secondary" type="button" id="toggle-password" onclick="togglePasswordVisibility()">
-            <i class="fas fa-eye" id="eye-icon"></i>
-        </button>
-    </div>
-    <p id="length-requirement" style="color: #555;">* Độ dài mật khẩu phải từ 8-20 ký tự.</p>
-    <p id="character-requirement" style="color: #555;">* Mật khẩu phải chứa chữ cái, số và ký tự đặc biệt.</p>
-    <p id="allowed-characters" style="color: #555;">* Ký tự cho phép: ~.!@#$%^&*</p>
-    <div class="buttons">
-        <button class="btn-cancel" onclick="goBackToOtp()">Quay lại</button>
-        <button class="btn-confirm" onclick="confirmNewPassword()">Đặt lại</button>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="vi">
 
-<script>
-    // Toggle Password Visibility
-    function togglePasswordVisibility() {
-        const newPasswordInput = document.getElementById('new-password-input');
-        const eyeIcon = document.getElementById('eye-icon');
-        
-        if (newPasswordInput.type === 'password') {
-            newPasswordInput.type = 'text';
-            eyeIcon.classList.remove('fa-eye');
-            eyeIcon.classList.add('fa-eye-slash');
-        } else {
-            newPasswordInput.type = 'password';
-            eyeIcon.classList.remove('fa-eye-slash');
-            eyeIcon.classList.add('fa-eye');
-        }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông tin thanh toán</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <style>
+    .modal-content {
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      margin: auto;
     }
 
-    // Confirm New Password
-    function confirmNewPassword() {
-        const newPassword = document.getElementById('new-password-input').value;
-        const lengthRequirement = document.getElementById('length-requirement');
-        const characterRequirement = document.getElementById('character-requirement');
-        const allowedCharacters = document.getElementById('allowed-characters');
-
-        // Regex patterns for validation
-        const lengthPattern = /^.{8,20}$/; // Length between 8-20 characters
-        const characterPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~.!@#$%^&*])/; // Must contain letters, digits, and special characters
-
-        // Validate password length
-        if (lengthPattern.test(newPassword)) {
-            lengthRequirement.style.color = 'green';
-        } else {
-            lengthRequirement.style.color = 'red';
-        }
-
-        // Validate password content
-        if (characterPattern.test(newPassword)) {
-            characterRequirement.style.color = 'green';
-        } else {
-            characterRequirement.style.color = 'red';
-        }
-
-        // Final validation and feedback
-        if (lengthPattern.test(newPassword) && characterPattern.test(newPassword)) {
-            alert("Mật khẩu mới đã được đặt lại thành công!");
-        } else {
-            alert("Vui lòng đảm bảo mật khẩu đáp ứng tất cả các yêu cầu.");
-        }
+    .modal-header {
+      border-bottom: none;
+      text-align: center;
+      font-weight: bold;
+      font-size: 22px;
+      color: #333;
     }
-</script>
+
+    .modal-body {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .order-info-section {
+      flex: 1;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      color: #333;
+    }
+
+    .order-info-section .info-item {
+      margin-bottom: 15px;
+    }
+
+    .order-info-section .info-item span {
+      font-weight: bold;
+      color: #000;
+      width: 200px;
+    }
+
+    .order-info-section .info-item p {
+      margin: 10px;
+      color: #555;
+    }
+
+    .order-info-section h5 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .qr-code-section {
+      flex: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .qr-code-section img {
+      max-width: 220px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .qr-code-section p {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .alert-warning {
+      width: 99%;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+      background-color: #fff3cd;
+      color: #856404;
+      margin: 15px 10px;
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 26px;
+      color: #333;
+    }
+
+    .modal-footer {
+      border-top: none;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      border: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .timer {
+      font-size: 28px;
+      font-weight: bold;
+      color: #d9534f;
+      margin-top: 20px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .success-message {
+      font-size: 20px;
+      font-weight: bold;
+      color: #28a745;
+      margin-top: 20px;
+      display: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- Modal Thanh toán -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Cảnh báo -->
+        <div class="alert alert-warning" role="alert">
+          Quý khách vui lòng không tắt trình duyệt cho đến khi nhận được kết quả giao dịch trên website. Xin cảm ơn!
+        </div>
+
+        <div class="modal-body">
+          <!-- Phần bên trái: Thông tin đơn hàng -->
+          <div class="order-info-section">
+            <h5>Thông tin giao dịch</h5>
+            <div class="info-item">
+              <p>Đơn vị thụ hưởng: <span>ELECTROLAND - Hệ thống bán lẻ thiết bị điện tử</span></p>
+            </div>
+            <div class="info-item">
+              <p>Số tiền thanh toán: <span>57.990.000 VND</span></p>
+            </div>
+            <div class="info-item">
+              <p>Nội dung thanh toán: <span>Thanh toán cho thiết bị điện tử, mã đơn hàng #168686008935</span></p>
+            </div>
+            <div class="info-item">
+              <p>Ngân hàng: <span>ViettinBank - Ngân hàng TMCP Công thương Việt Nam</span></p>
+            </div>
+            <div class="info-item">
+              <p>Mã đơn hàng: <span>168686008935</span></p>
+            </div>
+            <div class="info-item">
+              <p>Nhà cung cấp: <span>CÔNG TY CỔ PHẦN BÁN LẺ KỸ THUẬT SỐ ELECTROLAND</span></p>
+            </div>
+          </div>
+
+          <!-- Phần bên phải: Mã QR -->
+          <div class="qr-code-section">
+            <h5>Quét mã qua ứng dụng Ngân hàng/ Ví điện tử</h5>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?data=ThanhToan123456789&size=200x200" alt="QR code">
+            <p>Scan to Pay</p>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Hủy thanh toán</button>
+
+            <!-- Đồng hồ đếm ngược -->
+            <div class="timer" id="timer">10:00</div>
+
+            <!-- Thông báo thành công -->
+            <div class="success-message" id="successMessage">Giao dịch thành công!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+  <!-- Script để mở modal và đồng hồ đếm ngược -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  // Hiển thị modal
+  const paymentModal = new bootstrap.Modal(document.getElementById("paymentModal"));
+  paymentModal.show();
+
+  // Cài đặt đồng hồ đếm ngược (5 phút = 300 giây)
+  let timeRemaining = 300; // 5 phút = 300 giây
+  const timerElement = document.getElementById("timer");
+  const successMessage = document.getElementById("successMessage");
+
+  // Hàm cập nhật đồng hồ
+  function updateTimer() {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+
+    // Cập nhật hiển thị đồng hồ
+    timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    
+    // Giảm thời gian còn lại
+    timeRemaining--;
+
+    // Nếu đã 10 giây, hiển thị thông báo "Giao dịch thành công!"
+    if (timeRemaining === 290) { // 10 giây đã trôi qua (300 - 10 = 290)
+      successMessage.style.display = "block";
+    }
+
+    // Nếu đồng hồ đã hết thời gian
+    if (timeRemaining < 0) {
+      clearInterval(timerInterval);
+    }
+  }
+
+  // Cập nhật đồng hồ mỗi giây
+  const timerInterval = setInterval(updateTimer, 1000);
+});
+
+
+
+  </script>
+</body>
+
+</html>
